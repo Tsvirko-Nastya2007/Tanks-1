@@ -19,6 +19,44 @@ void Game::check_events() {
 	sf::Event event;
 	while (window.pollEvent(event)) {
 		if (event.type == sf::Event::Closed) window.close();
+		if (event.type == sf::Event::Closed) window.close();
+		if (event.type == sf::Event::KeyReleased)
+		{
+			if (event.key.code == sf::Keyboard::Down) {
+				righttank.setMoveDown(false);
+			}
+			if (event.key.code == sf::Keyboard::Left) {
+				righttank.setMoveLeft(false);
+			}
+			if (event.key.code == sf::Keyboard::Right) {
+				righttank.setMoveRight(false);
+			}
+			if (event.key.code == sf::Keyboard::Up) {
+				righttank.setMoveUp(false);
+			}
+		}
+		if (event.type == sf::Event::KeyPressed) {
+			if (event.key.code == sf::Keyboard::Left &&
+				righttank.getPosition().x > 0)
+			{
+				righttank.setMoveLeft(true);
+			}
+			if (event.key.code == sf::Keyboard::Right &&
+				righttank.getPosition().x < WINDOW_WIDTH - righttank.getWidth())
+			{
+				righttank.setMoveRight(true);
+			}
+			if (event.key.code == sf::Keyboard::Up &&
+				righttank.getPosition().y > 0)
+			{
+				righttank.setMoveUp(true);
+			}
+			if (event.key.code == sf::Keyboard::Down &&
+				righttank.getPosition().y < WINDOW_HEIGHT - righttank.getWidth())
+			{
+				righttank.setMoveDown(true);
+			}
+		}
 	}
 }
 
@@ -26,26 +64,26 @@ void Game::check_colisions() {
 	//pravy tank
 	while (righttank.getHitBox().intersects(l1.getHitBox())|| righttank.getHitBox().intersects(l2.getHitBox()) ||
 		righttank.getHitBox().intersects(l3.getHitBox()) || righttank.getHitBox().intersects(l4.getHitBox())
-		&& moveRight==true) {
-		moveRight = false;
+		&& righttank.getMoveRight()) {
+		righttank.setMoveRight(false);
 		righttank.move(-1,0);
 	}
 	while (righttank.getHitBox().intersects(l1.getHitBox()) || righttank.getHitBox().intersects(l2.getHitBox()) ||
 		righttank.getHitBox().intersects(l3.getHitBox()) || righttank.getHitBox().intersects(l4.getHitBox())
-		&& moveLeft==true) {
-		moveLeft = false;
+		&& righttank.getMoveLeft()) {
+		righttank.setMoveLeft(false);
 		righttank.move(1, 0);
 	}
 	while (righttank.getHitBox().intersects(l1.getHitBox()) || righttank.getHitBox().intersects(l2.getHitBox()) ||
 		righttank.getHitBox().intersects(l3.getHitBox()) || righttank.getHitBox().intersects(l4.getHitBox())
-		&& moveUp==true) {
-		moveUp = false;
+		&& righttank.getMoveUp()) {
+		righttank.setMoveUp(false);
 		righttank.move(0,1);
 	}
 	while (righttank.getHitBox().intersects(l1.getHitBox()) || righttank.getHitBox().intersects(l2.getHitBox()) ||
 		righttank.getHitBox().intersects(l3.getHitBox()) || righttank.getHitBox().intersects(l4.getHitBox())
-		&& moveDown==true) {
-		moveDown = false;
+		&& righttank.getMoveDown()) {
+		righttank.setMoveDown(false);
 		righttank.move(0, -1);
 	}
 	//levy tank

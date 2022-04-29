@@ -26,6 +26,6 @@ private:
 	void update();
 	void draw();
 	void check_colisions();
-public:
-	sf::RenderWindow getWindow() { return window; }
+
+	//sf::RenderWindow getWindow() { return window; }
 };

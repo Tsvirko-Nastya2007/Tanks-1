@@ -16,46 +16,9 @@ public:
     void move(float x, float y) { sprite.move(x, y); }
     void update() {
         //sf::RenderWindow window;
-        sf::Event event;
-        while (Game::window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) window.close();
-            if (event.type == sf::Event::KeyReleased)
-            {
-                if (event.key.code == sf::Keyboard::Down) {
-                    moveDown = false;
-                }
-                if (event.key.code == sf::Keyboard::Left) {
-                    moveLeft = false;
-                }
-                if (event.key.code == sf::Keyboard::Right) {
-                    moveRight = false;
-                }
-                if (event.key.code == sf::Keyboard::Up) {
-                    moveUp = false;
-                }
-            }
-            if (event.type == sf::Event::KeyPressed) {
-                if (event.key.code == sf::Keyboard::Left &&
-                    sprite.getPosition().x > 0)
-                {
-                    moveLeft = true;
-                }
-                if (event.key.code == sf::Keyboard::Right &&
-                    sprite.getPosition().x < (WINDOW_WIDTH - sprite.getGlobalBounds().width))
-                {
-                    moveRight = true;
-                }
-                if (event.key.code == sf::Keyboard::Up &&
-                    sprite.getPosition().y > 0)
-                {
-                    moveUp = true;
-                }
-                if (event.key.code == sf::Keyboard::Down &&
-                    sprite.getPosition().y < (WINDOW_HEIGHT - sprite.getGlobalBounds().width))
-                {
-                    moveDown = true;
-                }
-            }
+        //sf::Event event;
+        //while (Game::window.pollEvent(event)) {
+            
             if (moveRight) {
                 sprite.move(speed, 0);
             }
@@ -68,11 +31,12 @@ public:
             if (moveDown) {
                 sprite.move(0, speed);
             }
-        }
+        
         
     }
     void draw(sf::RenderWindow& window) { window.draw(sprite); }
     sf::FloatRect getHitBox() {
         return sprite.getGlobalBounds();
     }
+    
 };
